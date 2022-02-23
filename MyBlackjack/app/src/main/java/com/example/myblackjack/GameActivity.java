@@ -63,6 +63,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         CarteJ4= (ImageView) findViewById(R.id.imagePlayer4);
         CarteJ5= (ImageView) findViewById(R.id.imagePlayer5);
 
+        ButtonReComm.setVisibility(View.INVISIBLE);
         ButtonX2.setVisibility(View.INVISIBLE);
         ButtonAdd.setVisibility(View.INVISIBLE);
         ButtonStay.setVisibility(View.INVISIBLE);
