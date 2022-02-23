@@ -405,6 +405,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         Button button= (Button) view;
+        //faire le buttonReComm pour reset toutes les images et les stats des value
         if(button.equals(ButtonComm)){
             startGame();
         }
