@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
 import android.view.View;
@@ -25,8 +24,8 @@ class CardPlayer {
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView CarteJ1, CarteJ2, CarteJ3, CarteC;
-    Button ButtonComm, ButtonStay, ButtonAdd, ButtonX2;
+    ImageView CarteJ1, CarteJ2, CarteJ3, CarteJ4, CarteJ5, CarteC1, CarteC2, CarteC3, CarteC4, CarteC5;
+    Button ButtonComm, ButtonReComm, ButtonStay, ButtonAdd, ButtonX2;
     TextView textValueCroup, textValuePlayer, textBet;
     int maxcard = 13;
     int mincard = 1;
@@ -42,6 +41,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         ButtonComm = (Button) findViewById(R.id.buttonCommencer);
         ButtonComm.setOnClickListener(this);
+        ButtonReComm = (Button) findViewById(R.id.buttonRecommencer);
+        ButtonReComm.setOnClickListener(this);
         ButtonAdd = (Button) findViewById(R.id.buttonDraw);
         ButtonAdd.setOnClickListener(this);
         ButtonStay = (Button) findViewById(R.id.buttonStay);
@@ -51,10 +52,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         textValuePlayer= (TextView) findViewById(R.id.textValuePlayer);
         textBet= (TextView) findViewById(R.id.textBet);
         textValueCroup= (TextView) findViewById(R.id.textValueCroup);
-        CarteC= (ImageView) findViewById(R.id.imageCroup);
+        CarteC1= (ImageView) findViewById(R.id.imageCroup);
+        CarteC2= (ImageView) findViewById(R.id.imageCroup2);
+        CarteC3= (ImageView) findViewById(R.id.imageCroup3);
+        CarteC4= (ImageView) findViewById(R.id.imageCroup4);
+        CarteC5= (ImageView) findViewById(R.id.imageCroup5);
         CarteJ1= (ImageView) findViewById(R.id.imagePlayer1);
         CarteJ2= (ImageView) findViewById(R.id.imagePlayer2);
         CarteJ3= (ImageView) findViewById(R.id.imagePlayer3);
+        CarteJ4= (ImageView) findViewById(R.id.imagePlayer4);
+        CarteJ5= (ImageView) findViewById(R.id.imagePlayer5);
 
         ButtonX2.setVisibility(View.INVISIBLE);
         ButtonAdd.setVisibility(View.INVISIBLE);
@@ -62,7 +69,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         CarteJ1.setVisibility(View.INVISIBLE);
         CarteJ2.setVisibility(View.INVISIBLE);
         CarteJ3.setVisibility(View.INVISIBLE);
-        CarteC.setVisibility(View.INVISIBLE);
+        CarteJ4.setVisibility(View.INVISIBLE);
+        CarteJ5.setVisibility(View.INVISIBLE);
+        CarteC1.setVisibility(View.INVISIBLE);
+        CarteC2.setVisibility(View.INVISIBLE);
+        CarteC3.setVisibility(View.INVISIBLE);
+        CarteC4.setVisibility(View.INVISIBLE);
+        CarteC5.setVisibility(View.INVISIBLE);
 
         cartes = new ArrayList<>();
 
@@ -387,6 +400,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+
     @Override
     public void onClick(View view) {
         Button button= (Button) view;
@@ -403,57 +417,71 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void startGame() {
-        ButtonComm.setVisibility(View.VISIBLE);
+        ButtonComm.setVisibility(View.INVISIBLE);
         ButtonX2.setVisibility(View.VISIBLE);
         ButtonAdd.setVisibility(View.VISIBLE);
         ButtonStay.setVisibility(View.VISIBLE);
-        textBet.setText("Faites un choix !");
-        Collections.shuffle(cartes);
-        assignImages(cartes.get(0), CarteJ1);
-        assignImages(cartes.get(3), CarteC);
+            textBet.setText("Faites un choix !");
         CarteJ1.setVisibility(View.VISIBLE);
-        CarteJ2.setVisibility(View.INVISIBLE);
-        CarteJ3.setVisibility(View.INVISIBLE);
-        CarteC.setVisibility(View.VISIBLE);
-
+        CarteC1.setVisibility(View.VISIBLE);
+            Collections.shuffle(cartes);
+        assignImages(cartes.get(0), CarteJ1);
         textValuePlayer.setText(card_value_p+"");
+        card_value_c = card_value_c - card_value_p;
+        assignImages(cartes.get(3), CarteC1);
         textValueCroup.setText(card_value_c+"");
 
-        /*CardPlayer gc = new CardPlayer(0, 0);
 
-        gc.cardP = new Random().nextInt((maxcard - mincard) + 1) + mincard;
-        textValuePlayer.setText(gc.cardP+"");
-
-        gc.cardC = new Random().nextInt((maxcard - mincard) + 1) + mincard;
-        textValueCroup.setText(gc.cardC+"");*/
     }
 
     public void onClickAdd(){
-        /*Integer card_value_c= Integer.parseInt(textValueCroup.getText().toString());
-        Integer card_value_p= Integer.parseInt(textValuePlayer.getText().toString());
-        card_value_p = card_value_p + new Random().nextInt((maxcard-mincard)+1)+mincard;*/
-        textValuePlayer.setText(card_value_p +"");
-
-        if (CarteJ2.getVisibility() == View.VISIBLE) {
-            // faire les actions avec les 3 cartes
+// penser à la lois charlie (si 5 cartes dans la main d'un joueur alors il gagne automatiquement)
+        if (CarteJ4.getVisibility() == View.VISIBLE) {
+            CarteJ5.setVisibility(View.VISIBLE);
+            assignImages(cartes.get(4), CarteJ5);
+            textValuePlayer.setText(card_value_p +"");
+        }else if (CarteJ3.getVisibility() == View.VISIBLE) {
+            CarteJ4.setVisibility(View.VISIBLE);
+            assignImages(cartes.get(5), CarteJ4);
+            textValuePlayer.setText(card_value_p +"");
+        }else if (CarteJ2.getVisibility() == View.VISIBLE) {
+            CarteJ3.setVisibility(View.VISIBLE);
             assignImages(cartes.get(2), CarteJ3);
-        } else {
-            // si cartej2 pas encore là alors faire juste les calculs avec les deux premieres
+            textValuePlayer.setText(card_value_p + "");
+        }else if (CarteJ1.getVisibility() == View.VISIBLE){
+            CarteJ2.setVisibility(View.VISIBLE);
+            card_value_p = card_value_p - card_value_c;
             assignImages(cartes.get(1), CarteJ2);
             textValuePlayer.setText(card_value_p +"");
-            CarteJ2.setVisibility(View.VISIBLE);
-
         }
+
+
+
+        /*if (CarteJ2.getVisibility() == View.VISIBLE) {
+            CarteJ3.setVisibility(View.VISIBLE);
+            assignImages(cartes.get(2), CarteJ3);
+            textValuePlayer.setText(card_value_p +"");
+        } else {
+            CarteJ2.setVisibility(View.VISIBLE);
+            card_value_p = card_value_p - card_value_c;
+            assignImages(cartes.get(1), CarteJ2);
+            textValuePlayer.setText(card_value_p +"");
+        }*/
 
         if (card_value_p > 21 ){
             textBet.setText("Bust");
+            ButtonComm.setVisibility(View.VISIBLE);
+            ButtonX2.setVisibility(View.INVISIBLE);
+            ButtonAdd.setVisibility(View.INVISIBLE);
+            ButtonStay.setVisibility(View.INVISIBLE);
+
+            //faire disparaitre boutons et dire de recommencer pcq perdu
             while(card_value_c < 17 ){
-                //card_value_c = card_value_c + new Random().nextInt((maxcard - mincard) + 1) + mincard;
-                textValueCroup.setText(card_value_c + "");
-                ButtonComm.setVisibility(View.VISIBLE);
-                ButtonX2.setVisibility(View.INVISIBLE);
-                ButtonAdd.setVisibility(View.INVISIBLE);
-                ButtonStay.setVisibility(View.INVISIBLE);
+                assignImages(cartes.get(4), CarteC2);
+                CarteC2.setVisibility(View.VISIBLE);
+                textValueCroup.setText(card_value_c +"");
+                // faire piocher le croupier jusqu'a ce qu'il ai += 17
+
             }
         }else{
             textBet.setText("Faites un choix !");
@@ -462,10 +490,18 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             //card_value_c = card_value_c + new Random().nextInt((maxcard - mincard) + 1) + mincard;
             textValueCroup.setText(card_value_c + "");
         }
-        if (card_value_p == 21 && card_value_c == 21){
-            textBet.setText("Egalité");
+        if (card_value_p == 17 && card_value_c == 17){
+            textBet.setText("Egalité");}
+            if (card_value_p == 18 && card_value_c == 18){
+                textBet.setText("Egalité");}
+                if (card_value_p == 19 && card_value_c == 19){
+                    textBet.setText("Egalité");}
+                    if (card_value_p == 20 && card_value_c == 20){
+                        textBet.setText("Egalité");}
+                        if (card_value_p == 21 && card_value_c == 21){
+                            textBet.setText("Egalité");}
         }
-    }
+
 
 
 
@@ -474,7 +510,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         ButtonX2.setVisibility(View.INVISIBLE);
         ButtonAdd.setVisibility(View.INVISIBLE);
         ButtonStay.setVisibility(View.INVISIBLE);
-        ButtonComm.setText("Recommencez !");
+        ButtonComm.setText("Recommencez !");//faire un autre bouton pour recommencez pour reset toutes les valeurs
 
         Integer valueC= Integer.parseInt(textValueCroup.getText().toString());
         Integer value= Integer.parseInt(textValuePlayer.getText().toString());

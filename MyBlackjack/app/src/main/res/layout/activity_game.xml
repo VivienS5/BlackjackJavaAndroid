@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="5dp"
+    android:background="@drawable/fondvert"
     tools:context=".MainActivity">
 
 
@@ -20,72 +20,144 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
+            android:textColor="@color/black"
             android:text="Argent" />
 
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageCroup"
-        android:layout_width="120dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="20dp"
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_gravity="center"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        android:layout_marginTop="20dp"
+        >
+        <ImageView
+            android:id="@+id/imageCroup"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
+        <ImageView
+            android:id="@+id/imageCroup2"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="30dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
+        <ImageView
+            android:id="@+id/imageCroup3"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="60dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
+        <ImageView
+            android:id="@+id/imageCroup4"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="80dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
+        <ImageView
+            android:id="@+id/imageCroup5"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="100dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
+    </RelativeLayout>
     <TextView
         android:id="@+id/textValueCroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textSize="30dp"
+        android:textColor="@color/black"
         android:text="ValueCroup" />
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        >
     <Button
         android:id="@+id/buttonCommencer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="190dp"
+        android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_weight="1"
-        android:layout_margin="40dp"
+        android:layout_marginTop="120dp"
         android:text="COMMENCER" />
 
+        <Button
+            android:id="@+id/buttonRecommencer"
+            android:layout_width="190dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="120dp"
+            android:visibility="invisible"
+            android:text="Recommencer" />
+    </RelativeLayout>
     <TextView
         android:id="@+id/textValuePlayer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textColor="@color/black"
         android:textSize="30dp"
         android:text="ValuePlayer" />
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center"
         >
+
+        <ImageView
+            android:id="@+id/imagePlayer1"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
+
     <ImageView
-    android:id="@+id/imagePlayer1"
-    android:layout_width="120dp"
-    android:layout_height="150dp"
-    android:layout_gravity="center"
-    app:srcCompat="@drawable/ic_launcher_foreground" />
+        android:id="@+id/imagePlayer2"
+        android:layout_width="120dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="30dp"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
     <ImageView
-    android:id="@+id/imagePlayer2"
-    android:layout_width="120dp"
-    android:layout_height="150dp"
-    android:layout_gravity="center"
-    app:srcCompat="@drawable/ic_launcher_foreground" />
-    <ImageView
-    android:id="@+id/imagePlayer3"
-    android:layout_width="120dp"
-    android:layout_height="150dp"
-    android:layout_gravity="center"
-    app:srcCompat="@drawable/ic_launcher_foreground" />
-    </LinearLayout>
+        android:id="@+id/imagePlayer3"
+        android:layout_width="120dp"
+        android:layout_height="150dp"
+        android:layout_marginLeft="60dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+        <ImageView
+            android:id="@+id/imagePlayer4"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="80dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
+        <ImageView
+            android:id="@+id/imagePlayer5"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="100dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
+    </RelativeLayout>
         <TextView
         android:id="@+id/textBet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textSize="30dp"
+        android:textColor="@color/black"
         android:text="mise" />
 
     <LinearLayout
