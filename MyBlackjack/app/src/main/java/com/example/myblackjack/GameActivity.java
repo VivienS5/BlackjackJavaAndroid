@@ -6,29 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-class CardPlayer {
-    int cardP;
-    int cardC;
-
-    CardPlayer(int cardP, int cardC) {
-        this.cardP = cardP;
-        this.cardC = cardC;
-    }
-}
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageView CarteJ1, CarteJ2, CarteJ3, CarteJ4, CarteJ5, CarteC1, CarteC2, CarteC3, CarteC4, CarteC5;
     Button ButtonComm, ButtonReComm, ButtonStay, ButtonAdd, ButtonX2;
     TextView textValueCroup, textValuePlayer, textBet;
-    int maxcard = 13;
-    int mincard = 1;
     int card_value_p = 0;
     int card_value_c = 0;
 
@@ -409,6 +396,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if(button.equals(ButtonComm)){
             startGame();
         }
+        if(button.equals(ButtonReComm)){
+            onClickRecomm();
+        }
         if(button.equals(ButtonAdd)){
             onClickAdd();
         }
@@ -427,10 +417,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         CarteJ1.setVisibility(View.VISIBLE);
         CarteC1.setVisibility(View.VISIBLE);
             Collections.shuffle(cartes);
-        assignImages(cartes.get(0), CarteJ1);
+        assignImages(cartes.get(1), CarteJ1);
         textValuePlayer.setText(card_value_p+"");
         card_value_c = card_value_c - card_value_p;
-        assignImages(cartes.get(3), CarteC1);
+        assignImages(cartes.get(6), CarteC1);
         textValueCroup.setText(card_value_c+"");
 
 
@@ -440,97 +430,173 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 // penser à la lois charlie (si 5 cartes dans la main d'un joueur alors il gagne automatiquement)
         if (CarteJ4.getVisibility() == View.VISIBLE) {
             CarteJ5.setVisibility(View.VISIBLE);
-            assignImages(cartes.get(4), CarteJ5);
+            assignImages(cartes.get(5), CarteJ5);
             textValuePlayer.setText(card_value_p +"");
         }else if (CarteJ3.getVisibility() == View.VISIBLE) {
             CarteJ4.setVisibility(View.VISIBLE);
-            assignImages(cartes.get(5), CarteJ4);
+            assignImages(cartes.get(4), CarteJ4);
             textValuePlayer.setText(card_value_p +"");
         }else if (CarteJ2.getVisibility() == View.VISIBLE) {
             CarteJ3.setVisibility(View.VISIBLE);
-            assignImages(cartes.get(2), CarteJ3);
+            assignImages(cartes.get(3), CarteJ3);
             textValuePlayer.setText(card_value_p + "");
         }else if (CarteJ1.getVisibility() == View.VISIBLE){
             CarteJ2.setVisibility(View.VISIBLE);
             card_value_p = card_value_p - card_value_c;
-            assignImages(cartes.get(1), CarteJ2);
+            assignImages(cartes.get(2), CarteJ2);
             textValuePlayer.setText(card_value_p +"");
         }
-
-
-
-        /*if (CarteJ2.getVisibility() == View.VISIBLE) {
-            CarteJ3.setVisibility(View.VISIBLE);
-            assignImages(cartes.get(2), CarteJ3);
-            textValuePlayer.setText(card_value_p +"");
-        } else {
-            CarteJ2.setVisibility(View.VISIBLE);
-            card_value_p = card_value_p - card_value_c;
-            assignImages(cartes.get(1), CarteJ2);
-            textValuePlayer.setText(card_value_p +"");
-        }*/
 
         if (card_value_p > 21 ){
             textBet.setText("Bust");
-            ButtonComm.setVisibility(View.VISIBLE);
+            ButtonComm.setVisibility(View.INVISIBLE);
+            ButtonReComm.setVisibility(View.VISIBLE);
             ButtonX2.setVisibility(View.INVISIBLE);
             ButtonAdd.setVisibility(View.INVISIBLE);
             ButtonStay.setVisibility(View.INVISIBLE);
-
-            //faire disparaitre boutons et dire de recommencer pcq perdu
-            while(card_value_c < 17 ){
-                assignImages(cartes.get(4), CarteC2);
                 CarteC2.setVisibility(View.VISIBLE);
+                assignImages(cartes.get(4), CarteC2);
                 textValueCroup.setText(card_value_c +"");
-                // faire piocher le croupier jusqu'a ce qu'il ai += 17
 
-            }
         }else{
             textBet.setText("Faites un choix !");
         }if (card_value_p == 21){
+            if(card_value_c < 17 ){
+                CarteC2.setVisibility(View.VISIBLE);
+                assignImages(cartes.get(4), CarteC2);
+                if (card_value_c < 17){
+                    assignImages(cartes.get(5), CarteC3);
+                    CarteC3.setVisibility(View.VISIBLE);
+                    if (card_value_c < 17){
+                        assignImages(cartes.get(6), CarteC4);
+                        CarteC4.setVisibility(View.VISIBLE);
+                        if (card_value_c < 17){
+                            assignImages(cartes.get(7), CarteC5);
+                            CarteC5.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+                textValueCroup.setText(card_value_c +"");
+            }
             textBet.setText("BlackJack !");
-            //card_value_c = card_value_c + new Random().nextInt((maxcard - mincard) + 1) + mincard;
             textValueCroup.setText(card_value_c + "");
-        }
+            ButtonComm.setVisibility(View.INVISIBLE);
+            ButtonReComm.setVisibility(View.VISIBLE);
+            ButtonX2.setVisibility(View.INVISIBLE);
+            ButtonAdd.setVisibility(View.INVISIBLE);
+            ButtonStay.setVisibility(View.INVISIBLE);
+        }else if (card_value_p == 21 && card_value_c == 21){
+            textBet.setText("Egalité");
+            ButtonComm.setVisibility(View.INVISIBLE);
+            ButtonReComm.setVisibility(View.VISIBLE);
+            ButtonX2.setVisibility(View.INVISIBLE);
+            ButtonAdd.setVisibility(View.INVISIBLE);
+            ButtonStay.setVisibility(View.INVISIBLE);}
         if (card_value_p == 17 && card_value_c == 17){
-            textBet.setText("Egalité");}
+            textBet.setText("Egalité");
+            ButtonComm.setVisibility(View.INVISIBLE);
+            ButtonReComm.setVisibility(View.VISIBLE);
+            ButtonX2.setVisibility(View.INVISIBLE);
+            ButtonAdd.setVisibility(View.INVISIBLE);
+            ButtonStay.setVisibility(View.INVISIBLE);}
             if (card_value_p == 18 && card_value_c == 18){
-                textBet.setText("Egalité");}
+                textBet.setText("Egalité");
+                ButtonComm.setVisibility(View.INVISIBLE);
+                ButtonReComm.setVisibility(View.VISIBLE);
+                ButtonX2.setVisibility(View.INVISIBLE);
+                ButtonAdd.setVisibility(View.INVISIBLE);
+                ButtonStay.setVisibility(View.INVISIBLE);}
                 if (card_value_p == 19 && card_value_c == 19){
-                    textBet.setText("Egalité");}
+                    textBet.setText("Egalité");
+                    ButtonComm.setVisibility(View.INVISIBLE);
+                    ButtonReComm.setVisibility(View.VISIBLE);
+                    ButtonX2.setVisibility(View.INVISIBLE);
+                    ButtonAdd.setVisibility(View.INVISIBLE);
+                    ButtonStay.setVisibility(View.INVISIBLE);}
                     if (card_value_p == 20 && card_value_c == 20){
-                        textBet.setText("Egalité");}
-                        if (card_value_p == 21 && card_value_c == 21){
-                            textBet.setText("Egalité");}
+                        textBet.setText("Egalité");
+                        ButtonComm.setVisibility(View.INVISIBLE);
+                        ButtonReComm.setVisibility(View.VISIBLE);
+                        ButtonX2.setVisibility(View.INVISIBLE);
+                        ButtonAdd.setVisibility(View.INVISIBLE);
+                        ButtonStay.setVisibility(View.INVISIBLE);}
+
+
         }
 
 
 
 
     public void onClickStay(){
-        ButtonComm.setVisibility(View.VISIBLE);
+        ButtonComm.setVisibility(View.INVISIBLE);
         ButtonX2.setVisibility(View.INVISIBLE);
         ButtonAdd.setVisibility(View.INVISIBLE);
         ButtonStay.setVisibility(View.INVISIBLE);
-        ButtonComm.setText("Recommencez !");//faire un autre bouton pour recommencez pour reset toutes les valeurs
-
-        Integer valueC= Integer.parseInt(textValueCroup.getText().toString());
-        Integer value= Integer.parseInt(textValuePlayer.getText().toString());
-
-        while(valueC < 17 ){
-            valueC = valueC + new Random().nextInt((maxcard - mincard) + 1) + mincard;
-            textValueCroup.setText(valueC + "");
+        ButtonReComm.setVisibility(View.VISIBLE);
+        
+        if(card_value_c < 17 ){
+            CarteC2.setVisibility(View.VISIBLE);
+            assignImages(cartes.get(4), CarteC2);
+            if (card_value_c < 17){
+                assignImages(cartes.get(5), CarteC3);
+                CarteC3.setVisibility(View.VISIBLE);
+                if (card_value_c < 17){
+                    assignImages(cartes.get(6), CarteC4);
+                    CarteC4.setVisibility(View.VISIBLE);
+                    if (card_value_c < 17){
+                        assignImages(cartes.get(7), CarteC5);
+                        CarteC5.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+            textValueCroup.setText(card_value_c +"");
         }
 
-        if (valueC <=21 && valueC >=17){
-            if (valueC > value){
+        if (card_value_c <=21 && card_value_c >=17){
+            if (card_value_c > card_value_p){
                 textBet.setText("Croupier win");
-            }else{
+            }
+            if (card_value_c == card_value_p){
+                textBet.setText("Egalité");
+            }
+            if (card_value_c < card_value_p){
                 textBet.setText("Player win");
             }
         }
-        if (valueC >= 22 ){
+        if (card_value_c >= 22 ){
             textBet.setText("Player win");
         }
+    }
+    public void onClickRecomm(){
+        card_value_c = 0;
+        card_value_p = 0;
+        textValueCroup.setText("");
+        textValuePlayer.setText("");
+        textBet.setText("Faites un choix !");
+        ButtonReComm.setVisibility(View.INVISIBLE);
+        ButtonX2.setVisibility(View.VISIBLE);
+        ButtonAdd.setVisibility(View.VISIBLE);
+        ButtonStay.setVisibility(View.VISIBLE);
+
+        CarteJ2.setVisibility(View.INVISIBLE);
+        CarteJ3.setVisibility(View.INVISIBLE);
+        CarteJ4.setVisibility(View.INVISIBLE);
+        CarteJ5.setVisibility(View.INVISIBLE);
+
+        CarteC2.setVisibility(View.INVISIBLE);
+        CarteC3.setVisibility(View.INVISIBLE);
+        CarteC4.setVisibility(View.INVISIBLE);
+        CarteC5.setVisibility(View.INVISIBLE);
+            textBet.setText("Faites un choix !");
+        CarteJ1.setVisibility(View.VISIBLE);
+        CarteC1.setVisibility(View.VISIBLE);
+        Collections.shuffle(cartes);
+        assignImages(cartes.get(0), CarteJ1);
+        textValuePlayer.setText(card_value_p+"");
+        card_value_c = card_value_c - card_value_p;
+        assignImages(cartes.get(3), CarteC1);
+        textValueCroup.setText(card_value_c+"");
+
+
     }
 }

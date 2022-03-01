@@ -87,7 +87,7 @@
         android:layout_width="190dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="100dp"
         android:text="COMMENCER" />
 
         <Button
@@ -95,9 +95,9 @@
             android:layout_width="190dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginTop="120dp"
-            android:visibility="invisible"
-            android:text="Recommencer" />
+            android:layout_marginTop="100dp"
+            android:text="Recommencer"
+            android:visibility="invisible" />
     </RelativeLayout>
     <TextView
         android:id="@+id/textValuePlayer"
