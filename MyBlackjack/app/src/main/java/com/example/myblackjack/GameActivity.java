@@ -392,7 +392,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         Button button= (Button) view;
-        //faire le buttonReComm pour reset toutes les images et les stats des value
         if(button.equals(ButtonComm)){
             startGame();
         }
@@ -427,6 +426,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onClickAdd(){
+        //note
 // penser à la lois charlie (si 5 cartes dans la main d'un joueur alors il gagne automatiquement)
         if (CarteJ4.getVisibility() == View.VISIBLE) {
             CarteJ5.setVisibility(View.VISIBLE);
@@ -454,23 +454,39 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             ButtonX2.setVisibility(View.INVISIBLE);
             ButtonAdd.setVisibility(View.INVISIBLE);
             ButtonStay.setVisibility(View.INVISIBLE);
-                CarteC2.setVisibility(View.VISIBLE);
-                assignImages(cartes.get(4), CarteC2);
-                textValueCroup.setText(card_value_c +"");
+            while (card_value_c <= 17) {
+                if (card_value_c <= 17 && CarteC1.getVisibility() == View.VISIBLE) {
+                    CarteC2.setVisibility(View.VISIBLE);
+                    assignImages(cartes.get(4), CarteC2);
+                }
+                if (card_value_c <= 17 && CarteC2.getVisibility() == View.VISIBLE) {
+                    CarteC3.setVisibility(View.VISIBLE);
+                    assignImages(cartes.get(5), CarteC3);
+                }
+                if (card_value_c <= 17 && CarteC3.getVisibility() == View.VISIBLE) {
+                    CarteC4.setVisibility(View.VISIBLE);
+                    assignImages(cartes.get(6), CarteC4);
+                }
+                if (card_value_c <= 17 && CarteC4.getVisibility() == View.VISIBLE) {
+                    CarteC5.setVisibility(View.VISIBLE);
+                    assignImages(cartes.get(7), CarteC5);
+                }
+                textValueCroup.setText(card_value_c + "");
+            }
 
         }else{
             textBet.setText("Faites un choix !");
         }if (card_value_p == 21){
-            if(card_value_c < 17 ){
+            if(card_value_c <= 17 ){
                 CarteC2.setVisibility(View.VISIBLE);
                 assignImages(cartes.get(4), CarteC2);
-                if (card_value_c < 17){
+                if (card_value_c <= 17){
                     assignImages(cartes.get(5), CarteC3);
                     CarteC3.setVisibility(View.VISIBLE);
-                    if (card_value_c < 17){
+                    if (card_value_c <= 17){
                         assignImages(cartes.get(6), CarteC4);
                         CarteC4.setVisibility(View.VISIBLE);
-                        if (card_value_c < 17){
+                        if (card_value_c <= 17){
                             assignImages(cartes.get(7), CarteC5);
                             CarteC5.setVisibility(View.VISIBLE);
                         }
@@ -533,23 +549,29 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         ButtonAdd.setVisibility(View.INVISIBLE);
         ButtonStay.setVisibility(View.INVISIBLE);
         ButtonReComm.setVisibility(View.VISIBLE);
-        
-        if(card_value_c < 17 ){
-            CarteC2.setVisibility(View.VISIBLE);
-            assignImages(cartes.get(4), CarteC2);
-            if (card_value_c < 17){
-                assignImages(cartes.get(5), CarteC3);
-                CarteC3.setVisibility(View.VISIBLE);
-                if (card_value_c < 17){
-                    assignImages(cartes.get(6), CarteC4);
-                    CarteC4.setVisibility(View.VISIBLE);
-                    if (card_value_c < 17){
-                        assignImages(cartes.get(7), CarteC5);
-                        CarteC5.setVisibility(View.VISIBLE);
-                    }
-                }
+
+
+        while (card_value_c <= 17) {
+            if (card_value_c <= 17) {
+                assignImages(cartes.get(4), CarteC2);
+                CarteC2.setVisibility(View.VISIBLE);
             }
-            textValueCroup.setText(card_value_c +"");
+            if (card_value_c <= 17 && CarteC2.getVisibility() == View.VISIBLE) {
+                CarteC3.setVisibility(View.VISIBLE);
+                assignImages(cartes.get(5), CarteC3);
+
+            }
+            if (card_value_c <= 17 && CarteC3.getVisibility() == View.VISIBLE) {
+                CarteC4.setVisibility(View.VISIBLE);
+                assignImages(cartes.get(6), CarteC4);
+
+            }
+            if (card_value_c <= 17 && CarteC4.getVisibility() == View.VISIBLE) {
+                CarteC5.setVisibility(View.VISIBLE);
+                assignImages(cartes.get(7), CarteC5);
+
+            }
+            textValueCroup.setText(card_value_c + "");
         }
 
         if (card_value_c <=21 && card_value_c >=17){
@@ -563,10 +585,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 textBet.setText("Player win");
             }
         }
-        if (card_value_c >= 22 ){
+        if (card_value_c >= 22 && card_value_p<= 21){
             textBet.setText("Player win");
+        }else{
+            textBet.setText("Croupier win");
         }
-    }
+        }
+
     public void onClickRecomm(){
         card_value_c = 0;
         card_value_p = 0;
