@@ -2,12 +2,44 @@ package com.example.myblackjack.models;
 
 public class Card {
     private String color, value;
-    private boolean isTurn;
+    public int number;
 
     public Card(String color, String value) {
         this.color = color;
         this.value = value;
-        this.isTurn= true;
+        int temp=0;
+        int tempColor =0;
+        switch (value){
+            case "A":
+                temp=1;
+                break;
+            case "V":
+                temp=11;
+                break;
+            case "D":
+                temp=12;
+                break;
+            case "R":
+                temp=13;
+                break;
+            default:
+                temp= Integer.parseInt(value);
+        }
+        switch (color){
+            case "Club":
+                tempColor=1;
+                break;
+            case "Spade":
+                tempColor=4;
+                break;
+            case "Hearth":
+                tempColor=3;
+                break;
+            case "Diamond":
+                tempColor=2;
+                break;
+        }
+        this.number = temp * 10+tempColor;
     }
 
     public String getColor() {
@@ -22,15 +54,17 @@ public class Card {
         return value;
     }
 
+    public int getRealValue(){
+        return 10;
+        //temp= Integer.parseInt(value);
+    }
+
     public void setValue(String value) {
         this.value = value;
     }
 
-    public boolean isTurn() {
-        return isTurn;
-    }
-
-    public void setTurn(boolean turn) {
-        isTurn = turn;
+    @Override
+    public String toString() {
+        return value+" "+color;
     }
 }

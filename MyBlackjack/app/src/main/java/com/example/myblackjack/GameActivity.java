@@ -11,15 +11,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.myblackjack.models.Card;
+import com.example.myblackjack.models.Deck;
+
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageView CarteJ1, CarteJ2, CarteJ3, CarteJ4, CarteJ5, CarteC1, CarteC2, CarteC3, CarteC4, CarteC5;
     Button ButtonComm, ButtonReComm, ButtonStay, ButtonAdd, ButtonX2;
-    TextView textValueCroup, textValuePlayer, textBet;
+    TextView textValueCroup, textValuePlayer, textBet, textMoney;
     int card_value_p = 0;
     int card_value_c = 0;
 
-    ArrayList<Integer> cartes;
+    ArrayList<Card> cards;
+    Deck mydeck;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         ButtonStay.setOnClickListener(this);
         ButtonX2 = (Button) findViewById(R.id.buttonX2);
         ButtonX2.setOnClickListener(this);
+        textMoney = (TextView) findViewById(R.id.textMoney);
         textValuePlayer= (TextView) findViewById(R.id.textValuePlayer);
         textBet= (TextView) findViewById(R.id.textBet);
         textValueCroup= (TextView) findViewById(R.id.textValueCroup);
@@ -51,7 +56,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         CarteJ5= (ImageView) findViewById(R.id.imagePlayer5);
 
         ButtonReComm.setVisibility(View.INVISIBLE);
-        ButtonX2.setVisibility(View.INVISIBLE);
+        ButtonX2.setVisibility(View.VISIBLE);
         ButtonAdd.setVisibility(View.INVISIBLE);
         ButtonStay.setVisibility(View.INVISIBLE);
         CarteJ1.setVisibility(View.INVISIBLE);
@@ -65,65 +70,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         CarteC4.setVisibility(View.INVISIBLE);
         CarteC5.setVisibility(View.INVISIBLE);
 
-        cartes = new ArrayList<>();
-
-        cartes.add(11);
-        cartes.add(12);
-        cartes.add(13);
-        cartes.add(14);
-        cartes.add(21);
-        cartes.add(22);
-        cartes.add(23);
-        cartes.add(24);
-        cartes.add(31);
-        cartes.add(32);
-        cartes.add(33);
-        cartes.add(34);
-        cartes.add(41);
-        cartes.add(42);
-        cartes.add(43);
-        cartes.add(44);
-        cartes.add(51);
-        cartes.add(52);
-        cartes.add(53);
-        cartes.add(54);
-        cartes.add(61);
-        cartes.add(62);
-        cartes.add(63);
-        cartes.add(64);
-        cartes.add(71);
-        cartes.add(72);
-        cartes.add(73);
-        cartes.add(74);
-        cartes.add(81);
-        cartes.add(82);
-        cartes.add(83);
-        cartes.add(84);
-        cartes.add(91);
-        cartes.add(92);
-        cartes.add(93);
-        cartes.add(94);
-        cartes.add(101);
-        cartes.add(102);
-        cartes.add(103);
-        cartes.add(104);
-        cartes.add(111);
-        cartes.add(112);
-        cartes.add(113);
-        cartes.add(114);
-        cartes.add(121);
-        cartes.add(122);
-        cartes.add(123);
-        cartes.add(124);
-        cartes.add(131);
-        cartes.add(132);
-        cartes.add(133);
-        cartes.add(134);
+        mydeck = new Deck();
+        mydeck.shuffle();
 
     }
 
-    public void assignImages(int cartes, ImageView image){
-        switch(cartes){
+    public void assignImages(int numCarte, ImageView image){
+        switch(numCarte){
             case 11:
                 image.setImageResource(R.drawable.c11);
                 card_value_p = card_value_p + 1;
@@ -326,67 +279,66 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case 111:
                 image.setImageResource(R.drawable.c111);
-                card_value_p = card_value_p + 11;
-                card_value_c = card_value_c + 11;
+                card_value_p = card_value_p + 10;
+                card_value_c = card_value_c + 10;
                 break;
             case 112:
                 image.setImageResource(R.drawable.c112);
-                card_value_p = card_value_p + 11;
-                card_value_c = card_value_c + 11;
+                card_value_p = card_value_p + 10;
+                card_value_c = card_value_c + 10;
                 break;
             case 113:
                 image.setImageResource(R.drawable.c113);
-                card_value_p = card_value_p + 11;
-                card_value_c = card_value_c + 11;
+                card_value_p = card_value_p + 10;
+                card_value_c = card_value_c + 10;
                 break;
             case 114:
                 image.setImageResource(R.drawable.c114);
-                card_value_p = card_value_p + 11;
-                card_value_c = card_value_c + 11;
+                card_value_p = card_value_p + 10;
+                card_value_c = card_value_c + 10;
                 break;
             case 121:
                 image.setImageResource(R.drawable.c121);
-                card_value_p = card_value_p + 12;
-                card_value_c = card_value_c + 12;
+                card_value_p = card_value_p + 10;
+                card_value_c = card_value_c + 10;
                 break;
             case 122:
                 image.setImageResource(R.drawable.c122);
-                card_value_p = card_value_p + 12;
-                card_value_c = card_value_c + 12;
+                card_value_p = card_value_p + 10;
+                card_value_c = card_value_c + 10;
                 break;
             case 123:
                 image.setImageResource(R.drawable.c123);
-                card_value_p = card_value_p + 12;
-                card_value_c = card_value_c + 12;
+                card_value_p = card_value_p + 10;
+                card_value_c = card_value_c + 10;
                 break;
             case 124:
                 image.setImageResource(R.drawable.c124);
-                card_value_p = card_value_p + 12;
-                card_value_c = card_value_c + 12;
+                card_value_p = card_value_p + 10;
+                card_value_c = card_value_c + 10;
                 break;
             case 131:
                 image.setImageResource(R.drawable.c131);
-                card_value_p = card_value_p + 13;
-                card_value_c = card_value_c + 13;
+                card_value_p = card_value_p + 10;
+                card_value_c = card_value_c + 10;
                 break;
             case 132:
                 image.setImageResource(R.drawable.c132);
-                card_value_p = card_value_p + 13;
-                card_value_c = card_value_c + 13;
+                card_value_p = card_value_p + 10;
+                card_value_c = card_value_c + 10;
                 break;
             case 133:
                 image.setImageResource(R.drawable.c133);
-                card_value_p = card_value_p + 13;
-                card_value_c = card_value_c + 13;
+                card_value_p = card_value_p + 10;
+                card_value_c = card_value_c + 10;
                 break;
             case 134:
                 image.setImageResource(R.drawable.c134);
-                card_value_p = card_value_p + 13;
-                card_value_c = card_value_c + 13;
+                card_value_p = card_value_p + 10;
+                card_value_c = card_value_c + 10;
                 break;
         }
     }
-
 
 
     @Override
@@ -404,6 +356,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if(button.equals(ButtonStay)){
             onClickStay();
         }
+        if(button.equals(ButtonX2)){
+            onClickTest();
+        }
 
     }
 
@@ -415,14 +370,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             textBet.setText("Faites un choix !");
         CarteJ1.setVisibility(View.VISIBLE);
         CarteC1.setVisibility(View.VISIBLE);
-            Collections.shuffle(cartes);
-        assignImages(cartes.get(1), CarteJ1);
+        Card c1 = mydeck.draw();
+        assignImages(c1.number, CarteJ1);
         textValuePlayer.setText(card_value_p+"");
         card_value_c = card_value_c - card_value_p;
-        assignImages(cartes.get(6), CarteC1);
+        Card c6 = mydeck.draw();
+        assignImages(c6.number, CarteC1);
         textValueCroup.setText(card_value_c+"");
-
-
     }
 
     public void onClickAdd(){
@@ -430,20 +384,24 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 // penser à la lois charlie (si 5 cartes dans la main d'un joueur alors il gagne automatiquement)
         if (CarteJ4.getVisibility() == View.VISIBLE) {
             CarteJ5.setVisibility(View.VISIBLE);
-            assignImages(cartes.get(5), CarteJ5);
+            Card c5 = mydeck.draw();
+            assignImages(c5.number, CarteJ5);
             textValuePlayer.setText(card_value_p +"");
         }else if (CarteJ3.getVisibility() == View.VISIBLE) {
             CarteJ4.setVisibility(View.VISIBLE);
-            assignImages(cartes.get(4), CarteJ4);
+            Card c2 = mydeck.draw();
+            assignImages(c2.number, CarteJ4);
             textValuePlayer.setText(card_value_p +"");
         }else if (CarteJ2.getVisibility() == View.VISIBLE) {
             CarteJ3.setVisibility(View.VISIBLE);
-            assignImages(cartes.get(3), CarteJ3);
+            Card c3 = mydeck.draw();
+            assignImages(c3.number, CarteJ3);
             textValuePlayer.setText(card_value_p + "");
         }else if (CarteJ1.getVisibility() == View.VISIBLE){
             CarteJ2.setVisibility(View.VISIBLE);
             card_value_p = card_value_p - card_value_c;
-            assignImages(cartes.get(2), CarteJ2);
+            Card c2 = mydeck.draw();
+            assignImages(c2.number, CarteJ2);
             textValuePlayer.setText(card_value_p +"");
         }
 
@@ -454,48 +412,41 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             ButtonX2.setVisibility(View.INVISIBLE);
             ButtonAdd.setVisibility(View.INVISIBLE);
             ButtonStay.setVisibility(View.INVISIBLE);
-            while (card_value_c <= 17) {
-                if (card_value_c <= 17 && CarteC1.getVisibility() == View.VISIBLE) {
-                    CarteC2.setVisibility(View.VISIBLE);
-                    assignImages(cartes.get(4), CarteC2);
-                }
-                if (card_value_c <= 17 && CarteC2.getVisibility() == View.VISIBLE) {
-                    CarteC3.setVisibility(View.VISIBLE);
-                    assignImages(cartes.get(5), CarteC3);
-                }
-                if (card_value_c <= 17 && CarteC3.getVisibility() == View.VISIBLE) {
-                    CarteC4.setVisibility(View.VISIBLE);
-                    assignImages(cartes.get(6), CarteC4);
-                }
-                if (card_value_c <= 17 && CarteC4.getVisibility() == View.VISIBLE) {
-                    CarteC5.setVisibility(View.VISIBLE);
-                    assignImages(cartes.get(7), CarteC5);
-                }
-                textValueCroup.setText(card_value_c + "");
-            }
 
+            CarteC2.setVisibility(View.VISIBLE);
+            Card c7 = mydeck.draw();
+            assignImages(c7.number, CarteC2);
+            card_value_c = card_value_c - (c2. + c3.number) ;
+            textValueCroup.setText(card_value_c + "");
+// il faut soustraire les Cartj2,3,4,5 pour avoir la bonne valeur
+            //penser a enlever les autres textvaluecroup en annotation
         }else{
             textBet.setText("Faites un choix !");
-        }if (card_value_p == 21){
+        }
+        if (card_value_p == 21){
             if(card_value_c <= 17 ){
                 CarteC2.setVisibility(View.VISIBLE);
-                assignImages(cartes.get(4), CarteC2);
+                Card c2 = mydeck.draw();
+                assignImages(c2.number, CarteJ2);
                 if (card_value_c <= 17){
-                    assignImages(cartes.get(5), CarteC3);
+                    Card c3 = mydeck.draw();
+                    assignImages(c3.number, CarteJ3);
                     CarteC3.setVisibility(View.VISIBLE);
                     if (card_value_c <= 17){
-                        assignImages(cartes.get(6), CarteC4);
+                        Card c4 = mydeck.draw();
+                        assignImages(c4.number, CarteJ4);
                         CarteC4.setVisibility(View.VISIBLE);
                         if (card_value_c <= 17){
-                            assignImages(cartes.get(7), CarteC5);
+                            Card c5 = mydeck.draw();
+                            assignImages(c5.number, CarteJ5);
                             CarteC5.setVisibility(View.VISIBLE);
                         }
                     }
                 }
-                textValueCroup.setText(card_value_c +"");
+                //textValueCroup.setText(card_value_c +"");
             }
             textBet.setText("BlackJack !");
-            textValueCroup.setText(card_value_c + "");
+            //textValueCroup.setText(card_value_c + "");
             ButtonComm.setVisibility(View.INVISIBLE);
             ButtonReComm.setVisibility(View.VISIBLE);
             ButtonX2.setVisibility(View.INVISIBLE);
@@ -540,9 +491,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
-
-
-
     public void onClickStay(){
         ButtonComm.setVisibility(View.INVISIBLE);
         ButtonX2.setVisibility(View.INVISIBLE);
@@ -551,28 +499,33 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         ButtonReComm.setVisibility(View.VISIBLE);
 
 
-        while (card_value_c <= 17) {
-            if (card_value_c <= 17) {
-                assignImages(cartes.get(4), CarteC2);
+
+            if (card_value_c <= 16) {
                 CarteC2.setVisibility(View.VISIBLE);
+                Card c2 = mydeck.draw();
+                assignImages(c2.number, CarteC2);
+                //textValueCroup.setText(card_value_c + "");
             }
-            if (card_value_c <= 17 && CarteC2.getVisibility() == View.VISIBLE) {
+            if (card_value_c <= 16 && CarteC2.getVisibility() == View.VISIBLE) {
                 CarteC3.setVisibility(View.VISIBLE);
-                assignImages(cartes.get(5), CarteC3);
-
+                Card c3 = mydeck.draw();
+                assignImages(c3.number, CarteC3);
+                //textValueCroup.setText(card_value_c + "");
             }
-            if (card_value_c <= 17 && CarteC3.getVisibility() == View.VISIBLE) {
+            if (card_value_c <= 16 && CarteC3.getVisibility() == View.VISIBLE) {
                 CarteC4.setVisibility(View.VISIBLE);
-                assignImages(cartes.get(6), CarteC4);
-
+                Card c4 = mydeck.draw();
+                assignImages(c4.number, CarteC4);
+                //textValueCroup.setText(card_value_c + "");
             }
-            if (card_value_c <= 17 && CarteC4.getVisibility() == View.VISIBLE) {
+            if (card_value_c <= 16 && CarteC4.getVisibility() == View.VISIBLE) {
                 CarteC5.setVisibility(View.VISIBLE);
-                assignImages(cartes.get(7), CarteC5);
-
+                Card c5 = mydeck.draw();
+                assignImages(c5.number, CarteC5);
+                //textValueCroup.setText(card_value_c + "");
             }
-            textValueCroup.setText(card_value_c + "");
-        }
+
+
 
         if (card_value_c <=21 && card_value_c >=17){
             if (card_value_c > card_value_p){
@@ -585,6 +538,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 textBet.setText("Player win");
             }
         }
+
         if (card_value_c >= 22 && card_value_p<= 21){
             textBet.setText("Player win");
         }else{
@@ -595,7 +549,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public void onClickRecomm(){
         card_value_c = 0;
         card_value_p = 0;
-        textValueCroup.setText("");
+        //textValueCroup.setText("");
         textValuePlayer.setText("");
         textBet.setText("Faites un choix !");
         ButtonReComm.setVisibility(View.INVISIBLE);
@@ -615,13 +569,19 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             textBet.setText("Faites un choix !");
         CarteJ1.setVisibility(View.VISIBLE);
         CarteC1.setVisibility(View.VISIBLE);
-        Collections.shuffle(cartes);
-        assignImages(cartes.get(0), CarteJ1);
+        Card c1 = mydeck.draw();
+        assignImages(c1.number, CarteJ1);
         textValuePlayer.setText(card_value_p+"");
         card_value_c = card_value_c - card_value_p;
-        assignImages(cartes.get(3), CarteC1);
+        Card c6 = mydeck.draw();
+        assignImages(c6.number, CarteC1);
         textValueCroup.setText(card_value_c+"");
 
+    }
 
+    public void onClickTest(){
+        Card c = mydeck.draw();
+        assignImages(c.number, CarteC1);
+        CarteC1.setVisibility(View.VISIBLE);
     }
 }

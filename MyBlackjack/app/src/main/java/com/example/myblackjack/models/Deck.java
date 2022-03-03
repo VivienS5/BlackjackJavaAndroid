@@ -9,7 +9,7 @@ public class Deck {
 
     public Deck() {
         cards = new ArrayList<Card>();
-        String[] colors = {"Club", "Spade", "hearth", "diamond"};
+        String[] colors = {"Club", "Spade", "Hearth", "Diamond"};
         for (String c : colors) {
             for (int i = 13; i > 0; i--) {
                 switch (i) {
