@@ -1,7 +1,8 @@
 package com.example.myblackjack.models;
 
 public class Card {
-    private String color, value;
+    public String color;
+    public String value;
     public int number;
 
     public Card(String color, String value) {
@@ -54,10 +55,6 @@ public class Card {
         return value;
     }
 
-    public int getRealValue(){
-        return 10;
-        //temp= Integer.parseInt(value);
-    }
 
     public void setValue(String value) {
         this.value = value;

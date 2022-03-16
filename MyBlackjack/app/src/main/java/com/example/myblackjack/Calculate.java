@@ -9,12 +9,6 @@ public class Calculate {
 
 
     public Calculate() {
-        textBet=0;
-        buttonP10=10;
-        buttonP20=20;
-        buttonP30=30;
-        buttonP50=50;
-        buttonP100=100;
 
     }
 
